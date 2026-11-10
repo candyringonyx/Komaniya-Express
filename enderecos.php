@@ -7,18 +7,33 @@ $conexao = new PDO(
 );
 
 // EXCLUIR ENDEREÇO
+
 if (isset($_GET["excluir"])) {
     $id = $_GET["excluir"];
 
-    $comando = $conexao->prepare(
-        "DELETE FROM enderecos WHERE id = ?"
-    );
+    try {
+        $comando = $conexao->prepare(
+            "DELETE FROM enderecos WHERE id = ?"
+        );
 
-    $comando->execute([$id]);
+        $comando->execute([$id]);
 
-    header("Location: enderecos.php");
-    exit;
+        header("Location: enderecos.php");
+        exit;
+
+    } catch (PDOException $e) {
+        if ($e->getCode() == "23000") {
+            echo "<script>
+                alert('Não é possível excluir este endereço porque ele está vinculado a um frete.');
+                window.location.href = 'enderecos.php';
+            </script>";
+            exit;
+        } else {
+            throw $e;
+        }
+    }
 }
+
 
 // BUSCAR ENDEREÇO PARA EDIÇÃO
 $enderecoEditar = null;

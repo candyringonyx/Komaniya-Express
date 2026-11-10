@@ -10,14 +10,24 @@ $conexao = new PDO(
 if (isset($_GET["excluir"])) {
     $id = $_GET["excluir"];
 
-    $comando = $conexao->prepare(
-        "DELETE FROM produtos WHERE id = ?"
-    );
+    try {
+        $sql = $conexao->prepare("DELETE FROM produtos WHERE id = ?");
+        $sql->execute([$id]);
 
-    $comando->execute([$id]);
+        header("Location: produtos.php");
+        exit;
 
-    header("Location: produtos.php");
-    exit;
+    } catch (PDOException $e) {
+        if ($e->getCode() == "23000") {
+            echo "<script>
+                alert('Não é possível excluir este produto porque ele está vinculado a um frete.');
+                window.location.href = 'produtos.php';
+            </script>";
+            exit;
+        } else {
+            throw $e;
+        }
+    }
 }
 
 // BUSCAR PRODUTO PARA EDIÇÃO

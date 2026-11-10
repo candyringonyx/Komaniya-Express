@@ -7,18 +7,33 @@ $conexao = new PDO(
 );
 
 // EXCLUIR TRANSPORTADORA
+
 if (isset($_GET["excluir"])) {
     $id = $_GET["excluir"];
 
-    $comando = $conexao->prepare(
-        "DELETE FROM transportadoras WHERE id = ?"
-    );
+    try {
+        $comando = $conexao->prepare(
+            "DELETE FROM transportadoras WHERE id = ?"
+        );
 
-    $comando->execute([$id]);
+        $comando->execute([$id]);
 
-    header("Location: transportadoras.php");
-    exit;
+        header("Location: transportadoras.php");
+        exit;
+
+    } catch (PDOException $e) {
+        if ($e->getCode() == "23000") {
+            echo "<script>
+                alert('Não é possível excluir esta transportadora porque ela está vinculada a um frete.');
+                window.location.href = 'transportadoras.php';
+            </script>";
+            exit;
+        } else {
+            throw $e;
+        }
+    }
 }
+
 
 // BUSCAR TRANSPORTADORA PARA EDIÇÃO
 $transportadoraEditar = null;
