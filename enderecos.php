@@ -39,6 +39,7 @@ if (isset($_GET["editar"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($_POST["id"])) {
+
         $sql = "UPDATE enderecos SET
                 nome = ?,
                 rua = ?,
@@ -63,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
 
     } else {
+
         $sql = "INSERT INTO enderecos
                 (nome, rua, numero, cidade, estado, cep, complemento)
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -90,13 +92,19 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <title>Endereços - Komaniya Express</title>
 </head>
 
 <body>
+
+<?php include "menu.php"; ?>
+
 <div class="container mt-5">
 
     <h1 class="text-center" style="color: #7b2cbf;">
@@ -114,6 +122,7 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
 
         <div class="mb-3">
             <label class="form-label">Identificação do endereço</label>
+
             <input type="text" name="nome" class="form-control"
             value="<?php echo htmlspecialchars($enderecoEditar['nome'] ?? ''); ?>"
             placeholder="Ex.: Depósito Central" required>
@@ -121,42 +130,50 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
 
         <div class="mb-3">
             <label class="form-label">Rua</label>
+
             <input type="text" name="rua" class="form-control"
             value="<?php echo htmlspecialchars($enderecoEditar['rua'] ?? ''); ?>"
-            required>
+            placeholder="Ex.: Avenida Brasil" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Número</label>
+
             <input type="text" name="numero" class="form-control"
             value="<?php echo htmlspecialchars($enderecoEditar['numero'] ?? ''); ?>"
-            required>
+            placeholder="Ex.: 150" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Cidade</label>
+
             <input type="text" name="cidade" class="form-control"
             value="<?php echo htmlspecialchars($enderecoEditar['cidade'] ?? ''); ?>"
-            required>
+            placeholder="Ex.: Cascavel" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Estado</label>
+
             <input type="text" name="estado" class="form-control"
             value="<?php echo htmlspecialchars($enderecoEditar['estado'] ?? ''); ?>"
-            required>
+            placeholder="Ex.: Paraná" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">CEP</label>
+
             <input type="text" name="cep" class="form-control"
-            value="<?php echo htmlspecialchars($enderecoEditar['cep'] ?? ''); ?>">
+            value="<?php echo htmlspecialchars($enderecoEditar['cep'] ?? ''); ?>"
+            placeholder="Ex.: 85810-000">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Complemento</label>
+
             <input type="text" name="complemento" class="form-control"
-            value="<?php echo htmlspecialchars($enderecoEditar['complemento'] ?? ''); ?>">
+            value="<?php echo htmlspecialchars($enderecoEditar['complemento'] ?? ''); ?>"
+            placeholder="Ex.: Sala 02, bloco A">
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -168,6 +185,7 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
     <h2 class="mt-5">Endereços cadastrados</h2>
 
     <table class="table table-bordered table-striped">
+
         <tr>
             <th>Identificação</th>
             <th>Rua</th>
@@ -180,6 +198,7 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
         </tr>
 
         <?php while ($endereco = $enderecos->fetch(PDO::FETCH_ASSOC)) { ?>
+
         <tr>
             <td><?php echo htmlspecialchars($endereco["nome"]); ?></td>
             <td><?php echo htmlspecialchars($endereco["rua"]); ?></td>
@@ -199,9 +218,12 @@ $enderecos = $conexao->query("SELECT * FROM enderecos");
                 Excluir</a>
             </td>
         </tr>
+
         <?php } ?>
+
     </table>
 
 </div>
+
 </body>
 </html>

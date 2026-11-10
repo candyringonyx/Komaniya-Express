@@ -93,6 +93,9 @@ $transportadoras = $conexao->query(
 </head>
 
 <body>
+
+<?php include "menu.php"; ?>
+
 <div class="container mt-5">
 
     <h1 class="text-center" style="color: #7b2cbf;">

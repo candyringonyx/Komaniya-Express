@@ -8,27 +8,39 @@ $nomeSistema = "Komaniya Express";
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Komaniya Express</title>
+
 <style>
+
+
 body {
-background-color: #f5effa;
-padding: 20px;
-}
-h1 {
-color: #7b2cbf;
-}
-p {
-font-size: 18px;
-}
-.cartao {
-background-color: white;
-padding: 30px;
-border-radius: 15px;
-max-width: 700px;
-margin: 40px auto;
-text-align: center;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)),
+        url("fundo.jpeg");
+    background-size: 250px;
+    background-position: top left;
+    background-repeat: repeat;
+    padding: 20px;
+    min-height: 100vh;
 }
 
+h1 {
+    color: #7b2cbf;
+}
+
+p {
+    font-size: 18px;
+}
+
+.cartao {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+}
 </style>
+
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
@@ -50,8 +62,6 @@ text-align: center;
     <h2>Gerenciador Logístico</h2>
     <p>Bem-vindo ao sistema!</p>
 <p> Gerencie seus produtos e fretes. </p>
-<button style="background-color: #9b59b6; color: white;">
-    Ver produtos
 </button>
 </div>
 </body>
